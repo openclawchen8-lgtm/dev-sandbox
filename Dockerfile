@@ -7,7 +7,8 @@ ENV FORCE_COLOR=1
 
 # 安裝 Bash、Git、Python 3、pip 與 C/C++ 編譯工具（許多 Python/Node 套件編譯需要）
 # 補齊 DuckDB 與財務分析套件（Pandas, Numpy）所需的 C++ 編譯器與底層庫
-RUN apk add --no-cache \
+RUN apk update && \
+    apk add --no-cache \
     bash \
     git \
     curl \
@@ -21,6 +22,12 @@ RUN apk add --no-cache \
     openssl-dev \
     ca-certificates \
     tzdata
+
+# 安裝測試用的套件
+RUN apk add --no-cache \
+    github-cli
+
+RUN rm -rf /var/cache/apk/*
 
 # 安裝 google/gemini-cli
 RUN npm install -g @google/gemini-cli

@@ -4,6 +4,8 @@
 # mkdir $HOME/dev-sandbox/
 # docker cp gemini-box:/root/.gemini $HOME/dev-sandbox/
 
+# 測試使用的環境變數: /Users/claw/dev-sandbox/.bashrc
+
 # gamini sandbox
 gemini-box() {
   #export GEMINI_API_KEY="xxxx"
@@ -13,6 +15,7 @@ gemini-box() {
     -e TERM=xterm-256color \
     -e COLORTERM=truecolor \
     -e FORCE_COLOR=1 \
+    -v "$HOME/dev-sandbox/.bashrc:/root/.bashrc" \
     -v "$HOME/dev-sandbox/.gemini:/root/.gemini" \
     -v "$HOME/Projects:/Users/claw/Projects" \
     -v "$HOME/Tasks:/Users/claw/Tasks" \
