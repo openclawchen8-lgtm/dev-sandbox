@@ -1,7 +1,7 @@
 
 services:
   gemini-box:
-    #image: gemini-fullstack-env
+    image: gemini-fullstack-env
     # 💡 如果你想直接用 docker compose build 編譯，可取消註解下一行
     build: .
     container_name: gemini-box
