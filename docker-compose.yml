@@ -1,0 +1,36 @@
+
+services:
+  gemini-box:
+    #image: gemini-fullstack-env
+    # 💡 如果你想直接用 docker compose build 編譯，可取消註解下一行
+    build: .
+    container_name: gemini-box
+    hostname: gemini-box
+    
+    # 對應 -it 參數（保持標準輸入開啟與配置偽終端）
+    stdin_open: true
+    tty: true
+
+    # 對應 -w /Users/claw
+    working_dir: /Users/claw
+
+    # 對應 -e 環境變數
+    environment:
+      #- GEMINI_API_KEY=${GEMINI_API_KEY} # 自動讀取你 Mac 主機上的 $GEMINI_API_KEY
+      - GEMINI_CLI_TRUST_WORKSPACE=true
+      - TERM=xterm-256color
+      - COLORTERM=truecolor
+      - FORCE_COLOR=1
+
+    # 對應 -v 掛載路徑
+    volumes:
+      - ${HOME}/dev-sandbox/.bashrc:/root/.bashrc
+      - ${HOME}/dev-sandbox/.gemini:/root/.gemini
+      - ${HOME}/dev-sandbox/.config:/root/.config
+      - ${HOME}/Projects:/Users/claw/Projects
+      - ${HOME}/Tasks:/Users/claw/Tasks
+      - ${HOME}/.qclaw/workspace/skills:/Users/claw/skills
+
+    # 記憶執行及不審核模式：gemini --yolo --resume
+    command: gemini --yolo --resume
+
